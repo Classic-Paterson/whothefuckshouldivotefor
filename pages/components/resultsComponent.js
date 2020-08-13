@@ -4,10 +4,8 @@ import Card from "react-bootstrap/Card";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
-import ToggleButton from "react-bootstrap/ToggleButton";
+import CounterComponent from "./counterComponent";
 
-import { FaThumbsUp, FaThumbsDown, FaHandPaper } from "react-icons/fa";
 
 const toggleButtonStyles = {
   width: "100%",
@@ -16,7 +14,7 @@ const toggleButtonStyles = {
 };
 
 const cardStyles = {
-  padding: "2rem 1rem",
+  padding: "2rem 1rem 0rem 1rem"
 };
 
 const parties = [
@@ -73,20 +71,7 @@ const ResultsComponent = () => {
                 <Card.Text>Should you vote?{" "}
                   <b>{element.PartyVotes.Decision}.</b></Card.Text>
                 <Card.Text>{element.PartyText}</Card.Text>
-                <ToggleButtonGroup style={toggleButtonStyles} type="checkbox">
-                  <ToggleButton style={toggleButtonStyles} variant="danger">
-                    <FaThumbsDown style={{ paddingBottom: "5px" }} />
-                    {element.PartyVotes.Against}
-                  </ToggleButton>
-                  <ToggleButton style={toggleButtonStyles} variant="warning">
-                    <FaHandPaper style={{ paddingBottom: "5px" }} />
-                    {element.PartyVotes.Undecided}
-                  </ToggleButton>
-                  <ToggleButton style={toggleButtonStyles} variant="success">
-                    <FaThumbsUp style={{ paddingBottom: "5px" }} />
-                    {element.PartyVotes.For}
-                  </ToggleButton>
-                </ToggleButtonGroup>
+                <CounterComponent results = {true} />
               </Card.Body>
             </Card>
           </Col>
