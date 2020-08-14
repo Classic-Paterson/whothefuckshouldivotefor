@@ -19,16 +19,14 @@ const cardStyles = {
 };
 
 function countPartyVotes(SelectedPolicies, partyId, decision) {
-  const selectedPartyPolicies = SelectedPolicies.filter(policy => policy.PartyId === partyId);
+  const selectedPartyPolicies = SelectedPolicies.filter((policy) => policy.PartyId === partyId);
   let count = selectedPartyPolicies.reduce((count, policy) => {
-      if (policy.Decision == decision) {
-        console.log("policy", policy)
-        
-        return count += 1;
-      }
-    }, 0);
-    console.log('count', count)
-    return count;
+    if (policy.Decision == decision) {
+      return (count += 1);
+    } else return count;
+  }, 0);
+  console.log("count", count);
+  return count;
 }
 
 const ResultsComponent = () => {
@@ -46,11 +44,7 @@ const ResultsComponent = () => {
             <Card>
               <Card.Img variant="top" src={party.PartyImage} />
               <Card.Body>
-                <Card.Title>
-                  {party.PartyTitle}
-                </Card.Title>
-                {/* <Card.Text>Should you vote?{" "}
-                  <b>{party.PartyVotes.Decision}.</b></Card.Text> */}
+                <Card.Title>{party.PartyTitle}</Card.Title>
                 <Card.Text>{party.PartyText}</Card.Text>
                 <CounterComponent
                   results={true}
