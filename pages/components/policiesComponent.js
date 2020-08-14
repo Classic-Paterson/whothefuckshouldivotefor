@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import Card from "react-bootstrap/Card";
 
 import CardColumns from "react-bootstrap/CardColumns";
-import Col from "react-bootstrap/Col";
 import CounterComponent from "./counterComponent";
 
 import { PolicyProviderContext } from "./policyProvider";
@@ -18,7 +17,6 @@ const PoliciesComponent = () => {
     <CardColumns style={colStyles} xs={1} sm={1} md={2} lg={3}>
       {Policies.map((policy) => {
         return (
-          // <Col style={colStyles}>
             <Card >
               <Card.Img variant="top" src={policy.PolicyImage} />
               <Card.Body>
@@ -27,7 +25,6 @@ const PoliciesComponent = () => {
                 <CounterComponent policyId={policy.PolicyId} partyId={policy.PartyId} results={false} />
               </Card.Body>
             </Card>
-          // </Col>
         );
       })}
     </CardColumns>
