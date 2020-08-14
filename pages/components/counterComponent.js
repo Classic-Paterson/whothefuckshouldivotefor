@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 
 import { FaThumbsUp, FaThumbsDown, FaHandPaper } from "react-icons/fa";
+
+import { PolicyProviderContext } from "./policyProvider";
 
 const toggleButtonStyles = {
   width: "100%",
@@ -12,23 +14,39 @@ const toggleButtonStyles = {
 };
 
 const CounterComponent = (props) => {
-    let [partyVotesFor, setPartyVotesForCount] = useState(0);
-    let [partyVotesAgainst, setPartyVotesAgainstCount] = useState(0);
-    let [partyVotesUndecided, setPartyVotesUndecidedCount] = useState(0);
-
+  let { setSelectedPolicy } = useContext(PolicyProviderContext);
+  console.log(props)
   return (
     <ToggleButtonGroup style={toggleButtonStyles} type="checkbox">
-      <ToggleButton style={toggleButtonStyles} variant="danger" onClick={() => setPartyVotesAgainstCount(partyVotesAgainst ++)}>
+      <ToggleButton
+        style={toggleButtonStyles}
+        variant="danger"
+        onClick={() => {
+          setSelectedPolicy(props.policyId, "against", props.partyId);
+        }}
+      >
         <FaThumbsDown style={{ paddingBottom: "5px" }} />
-        {props.results ? partyVotesAgainst : ''}
+        {props.votesAgainst}
       </ToggleButton>
-      <ToggleButton style={toggleButtonStyles} variant="warning" onClick={() => setPartyVotesUndecidedCount(partyVotesUndecided ++)}>
+      <ToggleButton
+        style={toggleButtonStyles}
+        variant="warning"
+        onClick={() => {
+          setSelectedPolicy(props.policyId, "undecided", props.partyId);
+        }}
+      >
         <FaHandPaper style={{ paddingBottom: "5px" }} />
-        {props.results ? partyVotesUndecided : ''}
+        {props.votesUndecided}
       </ToggleButton>
-      <ToggleButton style={toggleButtonStyles} variant="success" onClick={() => setPartyVotesForCount(partyVotesFor ++)}>
+      <ToggleButton
+        style={toggleButtonStyles}
+        variant="success"
+        onClick={() => {
+          setSelectedPolicy(props.policyId, "for", props.partyId);
+        }}
+      >
         <FaThumbsUp style={{ paddingBottom: "5px" }} />
-        {props.results ? partyVotesFor : ''}
+        {props.votesFor}
       </ToggleButton>
     </ToggleButtonGroup>
   );
