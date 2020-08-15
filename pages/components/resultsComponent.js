@@ -13,7 +13,7 @@ import PoliciesComponent from "./policiesComponent";
 const colStyles = {
   padding: "2rem 1rem 0rem 1rem",
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fit, minmax(277px, 1fr))",
   gridGap: "30px 0px",
 };
 
