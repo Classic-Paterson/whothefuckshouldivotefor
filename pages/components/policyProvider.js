@@ -173,6 +173,9 @@ const PolicyProvider = (props) => {
   const [state, setState] = React.useState(initialState);
   const setSelectedPolicy = (PolicyId, Decision, PartyId) => {
     setState((state) => {
+
+      const selectedPolicies = state.SelectedPolicies.filter((policy) => policy.PolicyId != PolicyId);
+
       const newPolicy = {
         PolicyId,
         PartyId,
@@ -180,7 +183,7 @@ const PolicyProvider = (props) => {
       };
       return {
         ...state,
-        SelectedPolicies: [...state.SelectedPolicies, newPolicy],
+        SelectedPolicies: [...selectedPolicies, newPolicy],
       };
     });
   };
