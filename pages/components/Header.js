@@ -19,7 +19,7 @@ const buttonStyles = {
 
 const Header = () => (
   <Jumbotron style={headerStyles}>
-    <div class="clearfix">
+    <div className="clearfix">
       <h1 className="header">Who the fuck should I vote for.</h1>
       <h3 className="header">
         A website for deciding who the fuck should <b><u>or shouldn't</u></b> get your vote.

@@ -24,7 +24,7 @@ const PoliciesComponent = () => {
     <CardDeck style={colStyles} xs={1} sm={1} md={2} lg={3}>
       {Policies.map((policy) => {
         return (
-          <Card>
+          <Card key={policy.PolicyId}>
             <Card.Img variant="top" src={policy.PolicyImage} />
             <Card.Body>
               <Card.Title>{policy.PolicyTitle}</Card.Title>

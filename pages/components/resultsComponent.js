@@ -8,6 +8,7 @@ import CardDeck from "react-bootstrap/CardDeck";
 import CounterComponent from "./counterComponent";
 
 import { PolicyProviderContext } from "./policyProvider";
+import PoliciesComponent from "./policiesComponent";
 
 const colStyles = {
   padding: "2rem 1rem 0rem 1rem",
@@ -18,8 +19,8 @@ const colStyles = {
 
 const footerStyles = {
   background: "none",
-  borderTop: "none"
-}
+  borderTop: "none",
+};
 
 function countPartyVotes(SelectedPolicies, partyId, decision) {
   const selectedPartyPolicies = SelectedPolicies.filter((policy) => policy.PartyId === partyId);
@@ -33,38 +34,49 @@ function countPartyVotes(SelectedPolicies, partyId, decision) {
 
 const ResultsComponent = () => {
   let { SelectedPolicies, Parties } = useContext(PolicyProviderContext);
+  if (SelectedPolicies.length > 0) {
+    return (
+      <CardDeck style={colStyles} xs={1} sm={1} md={2} lg={3}>
+        {Parties.map((party) => {
+          const partyVotesFor = countPartyVotes(SelectedPolicies, party.PartyId, "for");
+          const partyVotesAgainst = countPartyVotes(SelectedPolicies, party.PartyId, "against");
+          const partyVotesUndecided = countPartyVotes(SelectedPolicies, party.PartyId, "undecided");
 
-  return (
-    <CardDeck style={colStyles} xs={1} sm={1} md={2} lg={3}>
-      {Parties.map((party) => {
-        const partyVotesFor = countPartyVotes(SelectedPolicies, party.PartyId, "for");
-        const partyVotesAgainst = countPartyVotes(SelectedPolicies, party.PartyId, "against");
-        const partyVotesUndecided = countPartyVotes(SelectedPolicies, party.PartyId, "undecided");
-
-        if (partyVotesFor > 0 || partyVotesAgainst > 0 || partyVotesUndecided > 0) {
-          return (
-            <Card>
-              <Card.Img variant="top" src={party.PartyImage} />
-              <Card.Body>
-                <Card.Title>{party.PartyTitle}</Card.Title>
-                <Card.Text>
-                  <TextTruncate line={10} element="span" truncateText=" …" text={party.PartyText} />
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer style={footerStyles}>
-                <CounterComponent
-                  results={true}
-                  votesFor={partyVotesFor}
-                  votesAgainst={partyVotesAgainst}
-                  votesUndecided={partyVotesUndecided}
-                />
-              </Card.Footer>
-            </Card>
-          );
-        }
-      })}
-    </CardDeck>
-  );
+          if (partyVotesFor > 0 || partyVotesAgainst > 0 || partyVotesUndecided > 0) {
+            return (
+              <Card key={party.PartyId}>
+                <Card.Img variant="top" src={party.PartyImage} />
+                <Card.Body>
+                  <Card.Title>{party.PartyTitle}</Card.Title>
+                  <Card.Text>
+                    <TextTruncate line={10} element="span" truncateText=" …" text={party.PartyText} />
+                  </Card.Text>
+                </Card.Body>
+                <Card.Footer style={footerStyles}>
+                  <CounterComponent
+                    results={true}
+                    votesFor={partyVotesFor}
+                    votesAgainst={partyVotesAgainst}
+                    votesUndecided={partyVotesUndecided}
+                  />
+                </Card.Footer>
+              </Card>
+            );
+          }
+        })}
+      </CardDeck>
+    );
+  } else {
+    return (
+      <CardDeck style={colStyles} xs={1} sm={1} md={2} lg={3}>
+        <Card>
+          <Card.Body>
+            <Card.Title>Pick some policies you clown</Card.Title>
+          </Card.Body>
+        </Card>
+      </CardDeck>
+    );
+  }
 };
 
 export default ResultsComponent;

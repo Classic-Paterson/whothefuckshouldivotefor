@@ -140,7 +140,7 @@ const initialState = {
       PartyId: 2,
     },
     {
-      PolicyId: 4,
+      PolicyId: 3,
       PolicyTitle: "Continue provide active learning programme for schools and ECEs",
       PolicyText:
         "This party says it wants NZ to be the best place in the world for children and young people. This party wants to inspire young people to be active and healthy. This party would continue to roll out the Healthy Active Learning programme. The policy is a continuation of the existing Healthy Active Learning programme. The programme involves ...",
@@ -148,7 +148,7 @@ const initialState = {
       PartyId: 3,
     },
     {
-      PolicyId: 5,
+      PolicyId: 4,
       PolicyTitle: "Stop the Tahr cull and establish a new management plan",
       PolicyText:
         "This party says the department of conservation's consultation about the proposed 2020-21 Tahr cull was inadequate. It says Tahr hunting provides jobs as well as recreational and tourism opportunities. This party says the cull should be stopped so consultation can occur, and a management system should be established to protect native flora and fauna while allowing for continued ...",
@@ -156,7 +156,47 @@ const initialState = {
       PartyId: 4,
     },
     {
+      PolicyId: 5,
+      PolicyTitle: "Consult hunters about policies for control of game animals",
+      PolicyText:
+        "This party says that for many New Zealanders, recreational fishing and hunting are a way of life which should be protected. This party also says that fishing and hunting communities have an important role to play in the conservation effort, as partners with government alongside local communities and NGOs. The expertise of the hunting community should be used in the control of game animals.",
+      PolicyImage: "/images/topic-media-culture-and-recreation.jpg",
+      PartyId: 5,
+    },
+    {
       PolicyId: 6,
+      PolicyTitle: "Allow all people in prison to vote",
+      PolicyText:
+        "This party says we need to uphold human rights by expanding opportunities for people to participate meaningfully in our democracy at all levels. This party says people in prison are already carrying out their punishment by being in prison, and denying them access to voting only alienates people from the political system. It says allowing people in ...",
+      PolicyImage: "/images/topic-law-justice-and-government.jpg",
+      PartyId: 1,
+    },
+    {
+      PolicyId: 7,
+      PolicyTitle: "Increase funding for social and support services for people who have caused and experienced harm",
+      PolicyText:
+        "This party says we have one of the highest rates of imprisonment in the world, fuelling a cycle of crime and despair which disproportionately harms Māori and people of colour, mental health sufferers, and low-income communities.our justice system needs transformative change ...",
+      PolicyImage: "/images/topic-law-justice-and-government.jpg",
+      PartyId: 2,
+    },
+    {
+      PolicyId: 8,
+      PolicyTitle: "Continue provide active learning programme for schools and ECEs",
+      PolicyText:
+        "This party says it wants NZ to be the best place in the world for children and young people. This party wants to inspire young people to be active and healthy. This party would continue to roll out the Healthy Active Learning programme. The policy is a continuation of the existing Healthy Active Learning programme. The programme involves ...",
+      PolicyImage: "/images/topic-media-culture-and-recreation.jpg",
+      PartyId: 3,
+    },
+    {
+      PolicyId: 9,
+      PolicyTitle: "Stop the Tahr cull and establish a new management plan",
+      PolicyText:
+        "This party says the department of conservation's consultation about the proposed 2020-21 Tahr cull was inadequate. It says Tahr hunting provides jobs as well as recreational and tourism opportunities. This party says the cull should be stopped so consultation can occur, and a management system should be established to protect native flora and fauna while allowing for continued ...",
+      PolicyImage: "/images/topic-media-culture-and-recreation.jpg",
+      PartyId: 4,
+    },
+    {
+      PolicyId: 10,
       PolicyTitle: "Consult hunters about policies for control of game animals",
       PolicyText:
         "This party says that for many New Zealanders, recreational fishing and hunting are a way of life which should be protected. This party also says that fishing and hunting communities have an important role to play in the conservation effort, as partners with government alongside local communities and NGOs. The expertise of the hunting community should be used in the control of game animals.",
