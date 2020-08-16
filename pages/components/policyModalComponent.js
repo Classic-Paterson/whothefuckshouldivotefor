@@ -6,24 +6,22 @@ const handleShow = () => setShow(true)
 
 const policyModalComponent = (props) => {
 
-    if (props.policy != null){
         return (
-          <Modal show={show} onHide={handleClose}>
-          <Card key={props.ModalPolicy.PolicyId}>
-              <Card.Img variant="top" src={props.ModalPolicy.PolicyImage} />
+            <Modal show={show} onHide={handleClose}>
+            <Card key={props.modalPolicy.PolicyId} style={{ height: "100%" }}>
+              <Card.Img variant="top" src={props.modalPolicy.PolicyImage} />
               <Card.Body>
-              <Card.Title>{props.ModalPolicy.PolicyTitle}</Card.Title>
-              <Card.Text>{props.ModalPolicy.PolicyText}</Card.Text>
+                <Card.Title>{props.modalPolicy.PolicyTitle}</Card.Title>
+                <Card.Text>{props.modalPolicy.PolicyText}</Card.Text>
               </Card.Body>
               <Card.Footer>
-              <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleClose}>
                   Close
-              </Button>
+                </Button>
               </Card.Footer>
-          </Card>
+            </Card>
           </Modal>
         );
-    }
 };
 
 export default policyModalComponent;

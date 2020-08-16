@@ -1,3 +1,5 @@
+// @ts-check
+
 import React, { useContext, useState } from "react";
 import Card from "react-bootstrap/Card";
 import TextTruncate from "react-text-truncate";
@@ -22,23 +24,24 @@ const footerStyles = {
 const PoliciesComponent = () => {
   let { Policies } = useContext(PolicyProviderContext);
 
-  const [modalPolicyId, setModalPolicyId] = useState(0);
+  const [modalPolicy, setModalPolicy] = useState(null);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (policy) => {
         setShow(true);
-        setModalPolicyId(policy.PolicyId)
+        setModalPolicy(policy)
   }
+
 
   return (
     <>
-      <CardDeck style={colStyles} xs={1} sm={1} md={2} lg={3}>
+      <CardDeck style={colStyles}>
         {Policies.map((policy) => {
           return (
             <>
               <Card key={policy.PolicyId} style={{ height: "100%" }}>
-                <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={handleShow(policy)} >
+                <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)} >
                   <Card.Img variant="top" src={policy.PolicyImage} />
                   <Card.Body>
                     <Card.Title>{policy.PolicyTitle}</Card.Title>
@@ -56,20 +59,20 @@ const PoliciesComponent = () => {
         })}
       </CardDeck>
 
-      <Modal show={show} onHide={handleClose}>
-        <Card key={modalPolicyId} style={{ height: "100%" }}>
-          {/* <Card.Img variant="top" src={policy.PolicyImage} /> */}
-          <Card.Body>
-            <Card.Title>{modalPolicyId}</Card.Title>
-            <Card.Text>{modalPolicyId}</Card.Text>
-          </Card.Body>
-          <Card.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Card.Footer>
-        </Card>
-      </Modal>
+      {modalPolicy ? <Modal show={show} onHide={handleClose}>
+          <Card key={modalPolicy.PolicyId} style={{ height: "100%" }}>
+            <Card.Img variant="top" src={modalPolicy.PolicyImage} />
+            <Card.Body>
+              <Card.Title>{modalPolicy.PolicyTitle}</Card.Title>
+              <Card.Text>{modalPolicy.PolicyText}</Card.Text>
+            </Card.Body>
+            <Card.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Card.Footer>
+          </Card>
+        </Modal> : null}
     </>
   );
 };

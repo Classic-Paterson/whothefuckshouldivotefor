@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import Card from "react-bootstrap/Card";
 
@@ -6,6 +6,8 @@ import TextTruncate from "react-text-truncate";
 
 import CardDeck from "react-bootstrap/CardDeck";
 import CounterComponent from "./counterComponent";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 import { PolicyProviderContext } from "./policyProvider";
 
@@ -33,37 +35,68 @@ function countPartyVotes(SelectedPolicies, partyId, decision) {
 
 const ResultsComponent = () => {
   let { SelectedPolicies, Parties } = useContext(PolicyProviderContext);
+
+  const [modalParty, setModalParty] = useState(null);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = (party) => {
+    setShow(true);
+    setModalParty(party);
+  };
+
   if (SelectedPolicies.length > 0) {
     return (
-      <CardDeck style={colStyles} xs={1} sm={1} md={2} lg={3}>
-        {Parties.map((party) => {
-          const partyVotesFor = countPartyVotes(SelectedPolicies, party.PartyId, "for");
-          const partyVotesAgainst = countPartyVotes(SelectedPolicies, party.PartyId, "against");
-          const partyVotesUndecided = countPartyVotes(SelectedPolicies, party.PartyId, "undecided");
+      <>
+        <CardDeck style={colStyles} xs={1} sm={1} md={2} lg={3}>
+          {Parties.map((party) => {
+            const partyVotesFor = countPartyVotes(SelectedPolicies, party.PartyId, "for");
+            const partyVotesAgainst = countPartyVotes(SelectedPolicies, party.PartyId, "against");
+            const partyVotesUndecided = countPartyVotes(SelectedPolicies, party.PartyId, "undecided");
 
-          if (partyVotesFor > 0 || partyVotesAgainst > 0 || partyVotesUndecided > 0) {
-            return (
-              <Card key={party.PartyId}>
-                <Card.Img variant="top" src={party.PartyImage} />
-                <Card.Body>
-                  <Card.Title>{party.PartyTitle}</Card.Title>
-                  <Card.Text>
-                    <TextTruncate line={10} element="span" truncateText=" …" text={party.PartyText} />
-                  </Card.Text>
-                </Card.Body>
-                <Card.Footer style={footerStyles}>
-                  <CounterComponent
-                    results={true}
-                    votesFor={partyVotesFor}
-                    votesAgainst={partyVotesAgainst}
-                    votesUndecided={partyVotesUndecided}
-                  />
-                </Card.Footer>
-              </Card>
-            );
-          }
-        })}
-      </CardDeck>
+            if (partyVotesFor > 0 || partyVotesAgainst > 0 || partyVotesUndecided > 0) {
+              return (
+                <Card key={party.PartyId}>
+                  <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(party)}>
+                    <Card.Img variant="top" src={party.PartyImage} />
+                    <Card.Body>
+                      <Card.Title>{party.PartyTitle}</Card.Title>
+                      <Card.Text>
+                        <TextTruncate line={10} element="span" truncateText=" …" text={party.PartyText} />
+                      </Card.Text>
+                    </Card.Body>
+                  </a>
+                  <Card.Footer style={footerStyles}>
+                    <CounterComponent
+                      results={true}
+                      votesFor={partyVotesFor}
+                      votesAgainst={partyVotesAgainst}
+                      votesUndecided={partyVotesUndecided}
+                    />
+                  </Card.Footer>
+                </Card>
+              );
+            }
+          })}
+        </CardDeck>
+
+        {modalParty ? (
+          <Modal show={show} onHide={handleClose}>
+            <Card key={modalParty.PolicyId} style={{ height: "100%" }}>
+              <Card.Img variant="top" src={modalParty.PartyImage} />
+              <Card.Body>
+                <Card.Title>{modalParty.PartyTitle}</Card.Title>
+                <Card.Text>{modalParty.PartyText}</Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+              </Card.Footer>
+            </Card>
+          </Modal>
+        ) : null}
+      </>
     );
   } else {
     return (

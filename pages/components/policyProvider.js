@@ -227,6 +227,7 @@ const PolicyProvider = (props) => {
       };
     });
   };
+
   return <PolicyProviderContext.Provider value={{ ...state, setSelectedPolicy }}>{props.children}</PolicyProviderContext.Provider>;
 };
 
