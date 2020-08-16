@@ -8,7 +8,6 @@ import CardDeck from "react-bootstrap/CardDeck";
 import CounterComponent from "./counterComponent";
 
 import { PolicyProviderContext } from "./policyProvider";
-import PoliciesComponent from "./policiesComponent";
 
 const colStyles = {
   padding: "2rem 1rem 0rem 1rem",
