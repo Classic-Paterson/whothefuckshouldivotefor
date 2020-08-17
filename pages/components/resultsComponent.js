@@ -42,9 +42,7 @@ function listPartyPolicies(SelectedPolicies, Policies, partyId, decision) {
       return selectedPolicy.PolicyId;
     }
   });
-  var sdfs = Policies.filter((policy) => selectedPolicieIds.includes(policy.PolicyId));
-  console.log("sdfs", sdfs);
-  return sdfs;
+  return Policies.filter((policy) => selectedPolicieIds.includes(policy.PolicyId));
 }
 
 const ResultsComponent = () => {

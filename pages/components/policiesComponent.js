@@ -69,7 +69,7 @@ const PoliciesComponent = () => {
               {modalPolicy.PolicySources.map((PolicySource) => {
                 return (
                   <Card.Text>
-                    <a href="/">{PolicySource}</a>
+                    <a target="_blank" href={PolicySource.Link}>{PolicySource.Title}</a>
                   </Card.Text>
                 );
               })}

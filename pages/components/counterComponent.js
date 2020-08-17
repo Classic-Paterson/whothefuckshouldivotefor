@@ -9,7 +9,37 @@ const toggleButtonStyles = {
   color: "black",
   fontSize: "20px",
   opacity: "1",
-  } 
+};
+
+const toggleButtonStylesFor = {
+  width: "100%",
+  color: "black",
+  fontSize: "20px",
+  color: "#155724",
+  opacity: "1",
+  backgroundColor: "#2ebe66",
+  borderColor: "#2ebe66",
+};
+
+const toggleButtonStylesAgainst = {
+  width: "100%",
+  color: "black",
+  fontSize: "20px",
+  color: "#721c24",
+  opacity: "1",
+  backgroundColor: "#fe9798",
+  borderColor: "#fe9798",
+};
+
+const toggleButtonStylesUndecided = {
+  width: "100%",
+  color: "black",
+  fontSize: "20px",
+  color: "#856404",
+  opacity: "1",
+  backgroundColor: "#f9c859",
+  borderColor: "#f9c859",
+};
 
 const iconStyles = {
   paddingBottom: "5px",
@@ -18,18 +48,16 @@ const iconStyles = {
 
 const CounterComponent = (props) => {
   let { setSelectedPolicy } = useContext(PolicyProviderContext);
-
   const [radioValue, setRadioValue] = useState(null);
 
   return (
     <>
       <ButtonGroup toggle style={toggleButtonStyles} disabled={props.results}>
         <ToggleButton
-          style={toggleButtonStyles}
+          style={toggleButtonStylesAgainst}
           disabled={props.results}
           key="against"
           type="radio"
-          variant="danger"
           name="radio"
           value="against"
           checked={radioValue === "against"}
@@ -42,12 +70,11 @@ const CounterComponent = (props) => {
           {props.votesAgainst}
         </ToggleButton>
         <ToggleButton
-          style={toggleButtonStyles}
+          style={toggleButtonStylesUndecided}
           disabled={props.results}
           checked={radioValue === "undecided"}
           key="undecided"
           type="radio"
-          variant="warning"
           name="radio"
           value="undecided"
           onChange={(e) => {
@@ -59,12 +86,11 @@ const CounterComponent = (props) => {
           {props.votesUndecided}
         </ToggleButton>
         <ToggleButton
-          style={toggleButtonStyles}
+          style={toggleButtonStylesFor}
           disabled={props.results}
           checked={radioValue === "for"}
           key="for"
           type="radio"
-          variant="success"
           name="radio"
           value="for"
           onChange={(e) => {
