@@ -9,7 +9,7 @@ const toggleButtonStyles = {
   color: "black",
   fontSize: "20px",
   opacity: "1",
-};
+  } 
 
 const iconStyles = {
   paddingBottom: "5px",
@@ -18,27 +18,33 @@ const iconStyles = {
 
 const CounterComponent = (props) => {
   let { setSelectedPolicy } = useContext(PolicyProviderContext);
+
+  const [radioValue, setRadioValue] = useState(null);
+
   return (
     <>
       <ButtonGroup toggle style={toggleButtonStyles} disabled={props.results}>
         <ToggleButton
-        style={toggleButtonStyles}
+          style={toggleButtonStyles}
           disabled={props.results}
           key="against"
           type="radio"
           variant="danger"
           name="radio"
           value="against"
+          checked={radioValue === "against"}
           onChange={(e) => {
             setSelectedPolicy(props.policyId, "against", props.partyId);
+            setRadioValue("against");
           }}
         >
           <FaThumbsDown style={iconStyles} />
           {props.votesAgainst}
         </ToggleButton>
         <ToggleButton
-        style={toggleButtonStyles}
+          style={toggleButtonStyles}
           disabled={props.results}
+          checked={radioValue === "undecided"}
           key="undecided"
           type="radio"
           variant="warning"
@@ -46,14 +52,16 @@ const CounterComponent = (props) => {
           value="undecided"
           onChange={(e) => {
             setSelectedPolicy(props.policyId, "undecided", props.partyId);
+            setRadioValue("undecided");
           }}
         >
           <FaHandPaper style={iconStyles} />
           {props.votesUndecided}
         </ToggleButton>
         <ToggleButton
-        style={toggleButtonStyles}
+          style={toggleButtonStyles}
           disabled={props.results}
+          checked={radioValue === "for"}
           key="for"
           type="radio"
           variant="success"
@@ -61,6 +69,7 @@ const CounterComponent = (props) => {
           value="for"
           onChange={(e) => {
             setSelectedPolicy(props.policyId, "for", props.partyId);
+            setRadioValue("for");
           }}
         >
           <FaThumbsUp style={iconStyles} />
