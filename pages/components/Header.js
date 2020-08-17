@@ -20,9 +20,9 @@ const buttonStyles = {
 const Header = () => (
   <Jumbotron style={headerStyles}>
     <div className="clearfix">
-      <h1 className="header">Who the fuck should I vote for.</h1>
+      <h1 className="header">Who the F#*k should I vote for.</h1>
       <h3 className="header">
-        A website for deciding who the fuck should <b><u>or shouldn't</u></b> get your vote.
+        A website for deciding who the f#*k should <b><u>or shouldn't</u></b> get your vote.
       </h3>
       <br />
       <Link href="/results">
