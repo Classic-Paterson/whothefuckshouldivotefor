@@ -82,15 +82,15 @@ const ResultsComponent = () => {
                         <TextTruncate line={10} element="span" truncateText=" …" text={party.PartyText} />
                       </Card.Text>
                     </Card.Body>
+                    <Card.Footer style={footerStyles}>
+                      <CounterComponent
+                        results={true}
+                        votesFor={partyVotesFor}
+                        votesAgainst={partyVotesAgainst}
+                        votesUndecided={partyVotesUndecided}
+                      />
+                    </Card.Footer>
                   </a>
-                  <Card.Footer style={footerStyles}>
-                    <CounterComponent
-                      results={true}
-                      votesFor={partyVotesFor}
-                      votesAgainst={partyVotesAgainst}
-                      votesUndecided={partyVotesUndecided}
-                    />
-                  </Card.Footer>
                 </Card>
               );
             }
@@ -115,7 +115,7 @@ const ResultsComponent = () => {
                     </>
                   );
                 })}
-                
+
                 {partyPoliciesUndecided.length > 0 ? <b>Policies you are undecided about:</b> : null}
                 {partyPoliciesUndecided.map((policy) => {
                   return (
@@ -127,7 +127,7 @@ const ResultsComponent = () => {
                   );
                 })}
 
-                {partyPoliciesAgainst.length > 0 ? <b>Policies you disagree with:</b> : null}  
+                {partyPoliciesAgainst.length > 0 ? <b>Policies you disagree with:</b> : null}
                 {partyPoliciesAgainst.map((policy) => {
                   return (
                     <>
