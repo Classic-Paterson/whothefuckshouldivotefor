@@ -141,7 +141,7 @@ const ResultsComponent = () => {
                 })}
               </Card.Body>
               <Card.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button className="float-right" variant="secondary" onClick={handleClose}>
                   Close
                 </Button>
               </Card.Footer>
