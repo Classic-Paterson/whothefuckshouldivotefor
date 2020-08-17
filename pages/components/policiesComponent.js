@@ -29,10 +29,9 @@ const PoliciesComponent = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (policy) => {
-        setShow(true);
-        setModalPolicy(policy)
-  }
-
+    setShow(true);
+    setModalPolicy(policy);
+  };
 
   return (
     <>
@@ -41,7 +40,7 @@ const PoliciesComponent = () => {
           return (
             <>
               <Card key={policy.PolicyId} style={{ height: "100%" }}>
-                <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)} >
+                <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)}>
                   <Card.Img variant="top" src={policy.PolicyImage} />
                   <Card.Body>
                     <Card.Title>{policy.PolicyTitle}</Card.Title>
@@ -59,12 +58,21 @@ const PoliciesComponent = () => {
         })}
       </CardDeck>
 
-      {modalPolicy ? <Modal show={show} onHide={handleClose}>
+      {modalPolicy ? (
+        <Modal show={show} onHide={handleClose}>
           <Card key={modalPolicy.PolicyId} style={{ height: "100%" }}>
             <Card.Img variant="top" src={modalPolicy.PolicyImage} />
             <Card.Body>
               <Card.Title>{modalPolicy.PolicyTitle}</Card.Title>
               <Card.Text>{modalPolicy.PolicyText}</Card.Text>
+              <b>Policy Sources:</b>
+              {modalPolicy.PolicySources.map((PolicySource) => {
+                return (
+                  <Card.Text>
+                    <a href="/">{PolicySource}</a>
+                  </Card.Text>
+                );
+              })}
             </Card.Body>
             <Card.Footer>
               <Button variant="secondary" onClick={handleClose}>
@@ -72,7 +80,8 @@ const PoliciesComponent = () => {
               </Button>
             </Card.Footer>
           </Card>
-        </Modal> : null}
+        </Modal>
+      ) : null}
     </>
   );
 };

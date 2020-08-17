@@ -130,6 +130,11 @@ const initialState = {
         "This party says we need to uphold human rights by expanding opportunities for people to participate meaningfully in our democracy at all levels. This party says people in prison are already carrying out their punishment by being in prison, and denying them access to voting only alienates people from the political system. It says allowing people in ...",
       PolicyImage: "/images/topic-law-justice-and-government.jpg",
       PartyId: 1,
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
     },
     {
       PolicyId: 2,
@@ -138,6 +143,11 @@ const initialState = {
         "This party says we have one of the highest rates of imprisonment in the world, fuelling a cycle of crime and despair which disproportionately harms Māori and people of colour, mental health sufferers, and low-income communities.our justice system needs transformative change ...",
       PolicyImage: "/images/topic-law-justice-and-government.jpg",
       PartyId: 2,
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
     },
     {
       PolicyId: 3,
@@ -146,6 +156,11 @@ const initialState = {
         "This party says it wants NZ to be the best place in the world for children and young people. This party wants to inspire young people to be active and healthy. This party would continue to roll out the Healthy Active Learning programme. The policy is a continuation of the existing Healthy Active Learning programme. The programme involves ...",
       PolicyImage: "/images/topic-media-culture-and-recreation.jpg",
       PartyId: 3,
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
     },
     {
       PolicyId: 4,
@@ -154,6 +169,11 @@ const initialState = {
         "This party says the department of conservation's consultation about the proposed 2020-21 Tahr cull was inadequate. It says Tahr hunting provides jobs as well as recreational and tourism opportunities. This party says the cull should be stopped so consultation can occur, and a management system should be established to protect native flora and fauna while allowing for continued ...",
       PolicyImage: "/images/topic-media-culture-and-recreation.jpg",
       PartyId: 4,
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
     },
     {
       PolicyId: 5,
@@ -162,6 +182,11 @@ const initialState = {
         "This party says that for many New Zealanders, recreational fishing and hunting are a way of life which should be protected. This party also says that fishing and hunting communities have an important role to play in the conservation effort, as partners with government alongside local communities and NGOs. The expertise of the hunting community should be used in the control of game animals.",
       PolicyImage: "/images/topic-media-culture-and-recreation.jpg",
       PartyId: 5,
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
     },
     {
       PolicyId: 6,
@@ -170,6 +195,11 @@ const initialState = {
         "This party says we need to uphold human rights by expanding opportunities for people to participate meaningfully in our democracy at all levels. This party says people in prison are already carrying out their punishment by being in prison, and denying them access to voting only alienates people from the political system. It says allowing people in ...",
       PolicyImage: "/images/topic-law-justice-and-government.jpg",
       PartyId: 1,
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
     },
     {
       PolicyId: 7,
@@ -177,6 +207,11 @@ const initialState = {
       PolicyText:
         "This party says we have one of the highest rates of imprisonment in the world, fuelling a cycle of crime and despair which disproportionately harms Māori and people of colour, mental health sufferers, and low-income communities.our justice system needs transformative change ...",
       PolicyImage: "/images/topic-law-justice-and-government.jpg",
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
       PartyId: 2,
     },
     {
@@ -186,6 +221,11 @@ const initialState = {
         "This party says it wants NZ to be the best place in the world for children and young people. This party wants to inspire young people to be active and healthy. This party would continue to roll out the Healthy Active Learning programme. The policy is a continuation of the existing Healthy Active Learning programme. The programme involves ...",
       PolicyImage: "/images/topic-media-culture-and-recreation.jpg",
       PartyId: 3,
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
     },
     {
       PolicyId: 9,
@@ -194,6 +234,11 @@ const initialState = {
         "This party says the department of conservation's consultation about the proposed 2020-21 Tahr cull was inadequate. It says Tahr hunting provides jobs as well as recreational and tourism opportunities. This party says the cull should be stopped so consultation can occur, and a management system should be established to protect native flora and fauna while allowing for continued ...",
       PolicyImage: "/images/topic-media-culture-and-recreation.jpg",
       PartyId: 4,
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
     },
     {
       PolicyId: 10,
@@ -202,6 +247,11 @@ const initialState = {
         "This party says that for many New Zealanders, recreational fishing and hunting are a way of life which should be protected. This party also says that fishing and hunting communities have an important role to play in the conservation effort, as partners with government alongside local communities and NGOs. The expertise of the hunting community should be used in the control of game animals.",
       PolicyImage: "/images/topic-media-culture-and-recreation.jpg",
       PartyId: 5,
+      PolicySources: [
+        "New Conservative, 'Treaty of Waitangi', no date",
+        "New Conservative, 'Full Community Policy', no date",
+        "New Conservative, 'Community Policy', no date"
+      ],
     },
   ],
   SelectedPolicies: [],

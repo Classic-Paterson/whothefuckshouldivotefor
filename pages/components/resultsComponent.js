@@ -1,3 +1,5 @@
+// @ts-check
+
 import React, { useContext, useState } from "react";
 
 import Card from "react-bootstrap/Card";
@@ -8,6 +10,7 @@ import CardDeck from "react-bootstrap/CardDeck";
 import CounterComponent from "./counterComponent";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 
 import { PolicyProviderContext } from "./policyProvider";
 
@@ -33,22 +36,38 @@ function countPartyVotes(SelectedPolicies, partyId, decision) {
   return count;
 }
 
-const ResultsComponent = () => {
-  let { SelectedPolicies, Parties } = useContext(PolicyProviderContext);
+function listPartyPolicies(SelectedPolicies, Policies, partyId, decision) {
+  let selectedPolicieIds = SelectedPolicies.map(function (selectedPolicy) {
+    if (selectedPolicy.PartyId === partyId && selectedPolicy.Decision === decision) {
+      return selectedPolicy.PolicyId;
+    }
+  });
+  var sdfs = Policies.filter((policy) => selectedPolicieIds.includes(policy.PolicyId));
+  console.log("sdfs", sdfs);
+  return sdfs;
+}
 
+const ResultsComponent = () => {
+  let { SelectedPolicies, Parties, Policies } = useContext(PolicyProviderContext);
   const [modalParty, setModalParty] = useState(null);
+  const [partyPoliciesFor, setPartyPoliciesFor] = useState(null);
+  const [partyPoliciesAgainst, setPartyPoliciesAgainst] = useState(null);
+  const [partyPoliciesUndecided, setPartyPoliciesUndecided] = useState(null);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (party) => {
-    setShow(true);
     setModalParty(party);
+    setPartyPoliciesFor(listPartyPolicies(SelectedPolicies, Policies, party.PartyId, "for"));
+    setPartyPoliciesAgainst(listPartyPolicies(SelectedPolicies, Policies, party.PartyId, "against"));
+    setPartyPoliciesUndecided(listPartyPolicies(SelectedPolicies, Policies, party.PartyId, "undecided"));
+    setShow(true);
   };
 
   if (SelectedPolicies.length > 0) {
     return (
       <>
-        <CardDeck style={colStyles} xs={1} sm={1} md={2} lg={3}>
+        <CardDeck style={colStyles}>
           {Parties.map((party) => {
             const partyVotesFor = countPartyVotes(SelectedPolicies, party.PartyId, "for");
             const partyVotesAgainst = countPartyVotes(SelectedPolicies, party.PartyId, "against");
@@ -87,6 +106,39 @@ const ResultsComponent = () => {
               <Card.Body>
                 <Card.Title>{modalParty.PartyTitle}</Card.Title>
                 <Card.Text>{modalParty.PartyText}</Card.Text>
+
+                {partyPoliciesFor.length > 0 ? <b>Policies you agree with:</b> : null}
+                {partyPoliciesFor.map((policy) => {
+                  return (
+                    <>
+                      <Alert key={policy.PolicyId} variant={"success"}>
+                        {policy.PolicyTitle}
+                      </Alert>
+                    </>
+                  );
+                })}
+                
+                {partyPoliciesUndecided.length > 0 ? <b>Policies you are undecided about:</b> : null}
+                {partyPoliciesUndecided.map((policy) => {
+                  return (
+                    <>
+                      <Alert key={policy.PolicyId} variant={"warning"}>
+                        {policy.PolicyTitle}
+                      </Alert>
+                    </>
+                  );
+                })}
+
+                {partyPoliciesAgainst.length > 0 ? <b>Policies you disagree with:</b> : null}  
+                {partyPoliciesAgainst.map((policy) => {
+                  return (
+                    <>
+                      <Alert key={policy.PolicyId} variant={"danger"}>
+                        {policy.PolicyTitle}
+                      </Alert>
+                    </>
+                  );
+                })}
               </Card.Body>
               <Card.Footer>
                 <Button variant="secondary" onClick={handleClose}>
@@ -100,7 +152,7 @@ const ResultsComponent = () => {
     );
   } else {
     return (
-      <CardDeck style={colStyles} xs={1} sm={1} md={2} lg={3}>
+      <CardDeck style={colStyles}>
         <Card>
           <Card.Body>
             <Card.Title>Pick some policies you clown</Card.Title>
