@@ -33,8 +33,8 @@
                 PartyId: tempPartyId,
                 PolicyTitle: item.innerHTML.replace('<em>', '').replace('</em>', ''),
                 // PolicyText: item.innerText,
-                PolicyImage: "/images/topic-law-justice-and-government.jpg",
-                PolicyId: (itemId + 169)
+                PolicyImage: "/images/topic-transport-and-infrastructure.jpg",
+                PolicyId: (itemId + 1991)
             }
             policyArray.push(json)
         }

@@ -11,7 +11,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { PolicyProviderContext } from "./policyProvider";
 
 const colStyles = {
-  padding: "2rem 1rem 0rem 1rem",
+  padding: "1rem 1rem 0rem 1rem",
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(277px, 1fr))",
   gridGap: "30px 0px",
@@ -23,7 +23,7 @@ const footerStyles = {
 };
 
 const accordianStyles = {
-  margin: "10px",
+  marginTop: "10px",
 };
 
 function policyDecision(SelectedPolicies, policyId) {
