@@ -34,7 +34,7 @@
                 PolicyTitle: item.innerHTML.replace('<em>', '').replace('</em>', ''),
                 // PolicyText: item.innerText,
                 PolicyImage: "/images/topic-law-justice-and-government.jpg",
-                PolicyId: itemId
+                PolicyId: (itemId + 169)
             }
             policyArray.push(json)
         }
