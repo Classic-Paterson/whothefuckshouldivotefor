@@ -47,8 +47,9 @@ const iconStyles = {
 };
 
 const CounterComponent = (props) => {
-  let { setSelectedPolicy } = useContext(PolicyProviderContext);
-  const [radioValue, setRadioValue] = useState(null);
+  let { setSelectedPolicy} = useContext(PolicyProviderContext);
+
+  const [radioValue, setRadioValue] = useState(props.decision);
 
   return (
     <>
@@ -66,7 +67,7 @@ const CounterComponent = (props) => {
             setRadioValue("against");
           }}
         >
-          <FaThumbsDown style={iconStyles} />
+          <FaThumbsDown style={iconStyles} />          
           {props.votesAgainst}
         </ToggleButton>
         <ToggleButton

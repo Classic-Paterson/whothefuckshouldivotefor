@@ -21,8 +21,18 @@ const footerStyles = {
   borderTop: "none",
 };
 
+function policyDecision(SelectedPolicies, policyId) {
+  let decision = ''
+  SelectedPolicies.map(function (selectedPolicy) {
+    if (selectedPolicy.PolicyId === policyId) {
+      decision = selectedPolicy.Decision;
+    }
+  });
+  return decision;
+}
+
 const PoliciesComponent = () => {
-  let { Policies } = useContext(PolicyProviderContext);
+  let { SelectedPolicies, Policies } = useContext(PolicyProviderContext);
 
   const [modalPolicy, setModalPolicy] = useState(null);
 
@@ -32,7 +42,7 @@ const PoliciesComponent = () => {
     setShow(true);
     setModalPolicy(policy);
   };
-
+  
   return (
     <>
       <CardDeck style={colStyles}>
@@ -50,7 +60,7 @@ const PoliciesComponent = () => {
                   </Card.Body>
                 </a>
                 <Card.Footer style={footerStyles}>
-                  <CounterComponent policyId={policy.PolicyId} partyId={policy.PartyId} results={false} />
+                  <CounterComponent policyId={policy.PolicyId} partyId={policy.PartyId} decision={policyDecision(SelectedPolicies, policy.PolicyId)} results={false} />
                 </Card.Footer>
               </Card>
             </>
@@ -59,20 +69,20 @@ const PoliciesComponent = () => {
       </CardDeck>
 
       {modalPolicy ? (
-        <Modal show={show} onHide={handleClose}>
+        <Modal size="lg" show={show} onHide={handleClose}>
           <Card key={modalPolicy.PolicyId} style={{ height: "100%" }}>
             <Card.Img variant="top" src={modalPolicy.PolicyImage} />
             <Card.Body>
               <Card.Title>{modalPolicy.PolicyTitle}</Card.Title>
-              <Card.Text>{modalPolicy.PolicyText}</Card.Text>
-              <b>Policy Sources:</b>
+              {/* <Card.Text>{modalPolicy.PolicyText}</Card.Text> */}
+              {/* <b>Policy Sources:</b>
               {modalPolicy.PolicySources.map((PolicySource) => {
                 return (
                   <Card.Text>
                     <a target="_blank" href={PolicySource.Link}>{PolicySource.Title}</a>
                   </Card.Text>
                 );
-              })}
+              })} */}
             </Card.Body>
             <Card.Footer>
               <Button className="float-right" variant="secondary" onClick={handleClose}>

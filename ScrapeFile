@@ -1,0 +1,42 @@
+  var policyArray = []
+  document.querySelectorAll(".colorbox-node").forEach((item, itemId) => {
+      let tempPartyId = 0
+
+      let partyName = item.parentElement.parentElement.parentElement.parentElement.parentElement.className.split(" ");
+    
+      if (partyName[2] == "NewConserviative"){
+        tempPartyId = 9
+      }
+      if (partyName[2] == "NationalParty"){
+        tempPartyId = 2
+      }
+      if (partyName[2] == "ACTParty"){
+        tempPartyId = 4
+      }
+      if (partyName[3] == "MaoriParty"){
+        tempPartyId = 8
+      }
+      if (partyName[2] == "GreenParty"){
+        tempPartyId = 6
+      }
+      if (partyName[2] == "TheOpportunitiesParty"){
+        tempPartyId = 16
+      }
+      if (partyName[2] == "LabourParty"){
+        tempPartyId = 1
+      }
+      if (partyName[3] == "NZFirst"){
+        tempPartyId = 10
+      }
+        if (tempPartyId > 0){
+            let json = {
+                PartyId: tempPartyId,
+                PolicyTitle: item.innerHTML.replace('<em>', '').replace('</em>', ''),
+                // PolicyText: item.innerText,
+                PolicyImage: "/images/topic-law-justice-and-government.jpg",
+                PolicyId: itemId
+            }
+            policyArray.push(json)
+        }
+    })
+    console.log(JSON.stringify(policyArray))

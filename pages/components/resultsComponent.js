@@ -79,7 +79,7 @@ const ResultsComponent = () => {
                     <Card.Body>
                       <Card.Title>{party.PartyTitle}</Card.Title>
                       <Card.Text>
-                        <TextTruncate line={10} element="span" truncateText=" …" text={party.PartyText} />
+                        <TextTruncate line={6} element="span" truncateText=" …" text={party.PartyText} />
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer style={footerStyles}>
@@ -98,7 +98,7 @@ const ResultsComponent = () => {
         </CardDeck>
 
         {modalParty ? (
-          <Modal show={show} onHide={handleClose}>
+          <Modal size="lg" show={show} onHide={handleClose}>
             <Card key={modalParty.PolicyId} style={{ height: "100%" }}>
               <Card.Img variant="top" src={modalParty.PartyImage} />
               <Card.Body>
