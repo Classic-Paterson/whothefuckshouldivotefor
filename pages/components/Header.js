@@ -20,8 +20,16 @@ const buttonStyles = {
   margin: "0px 5px",
 };
 
+function PolicyCount(Policies) {
+  let count = 0;
+  Policies.map((PolicyCategory) => {
+    count += PolicyCategory.Policies.length
+  })
+  return count;
+}
+
 const Header = () => {
-  let { Policies } = useContext(PolicyProviderContext);
+  let { Policies, SelectedPolicies } = useContext(PolicyProviderContext);
   return (
     <Jumbotron style={headerStyles}>
       <div className="clearfix">
@@ -33,7 +41,7 @@ const Header = () => {
           </b>{" "}
           get your vote.
         </h3>
-        There are currently {Policies.length} f#*king policies.
+        There are currently {PolicyCount(Policies)} f#*king policies and you've decided about {SelectedPolicies.length} of them.
         <br />
         <Link href="/results">
           <Button style={buttonStyles} className="float-right">

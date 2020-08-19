@@ -46,7 +46,18 @@ function listPartyPolicies(SelectedPolicies, Policies, partyId, decision) {
       return selectedPolicy.PolicyId;
     }
   });
-  return Policies.filter((policy) => selectedPolicieIds.includes(policy.PolicyId));
+
+  let policiesToReturn = [];
+
+  Policies.forEach(policyCategory => {
+    policyCategory.Policies.forEach(policy => {
+      if (selectedPolicieIds.includes(policy.PolicyId)) {
+        policiesToReturn.push(policy)
+      }
+    })
+  });
+
+  return policiesToReturn;
 }
 
 const ResultsComponent = () => {

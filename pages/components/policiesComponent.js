@@ -7,6 +7,7 @@ import CardDeck from "react-bootstrap/CardDeck";
 import CounterComponent from "./counterComponent";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Accordion from "react-bootstrap/Accordion";
 import { PolicyProviderContext } from "./policyProvider";
 
 const colStyles = {
@@ -21,8 +22,12 @@ const footerStyles = {
   borderTop: "none",
 };
 
+const accordianStyles = {
+  margin: "10px",
+};
+
 function policyDecision(SelectedPolicies, policyId) {
-  let decision = ''
+  let decision = "";
   SelectedPolicies.map(function (selectedPolicy) {
     if (selectedPolicy.PolicyId === policyId) {
       decision = selectedPolicy.Decision;
@@ -42,31 +47,51 @@ const PoliciesComponent = () => {
     setShow(true);
     setModalPolicy(policy);
   };
-  
+
   return (
     <>
-      <CardDeck style={colStyles}>
-        {Policies.map((policy) => {
+      <Accordion style={accordianStyles} defaultActiveKey="0">
+        {Policies.map((policyCatergory, policyCatergoryId) => {
           return (
-            <>
-              <Card key={policy.PolicyId} style={{ height: "100%" }}>
-                <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)}>
-                  <Card.Img variant="top" src={policy.PolicyImage} />
-                  <Card.Body>
-                    <Card.Title>{policy.PolicyTitle}</Card.Title>
-                    <Card.Text>
-                      <TextTruncate line={3} element="span" truncateText="…" text={policy.PolicyText} />
-                    </Card.Text>
-                  </Card.Body>
-                </a>
-                <Card.Footer style={footerStyles}>
-                  <CounterComponent policyId={policy.PolicyId} partyId={policy.PartyId} decision={policyDecision(SelectedPolicies, policy.PolicyId)} results={false} />
-                </Card.Footer>
-              </Card>
-            </>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey={policyCatergoryId + 1}>
+                {policyCatergory.PolicyCategory} - {policyCatergory.Policies.length}
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey={policyCatergoryId + 1}>
+                <Card.Body>
+                  <CardDeck style={colStyles}>
+                    {policyCatergory.Policies.map((policy) => {
+                      return (
+                        <>
+                          <Card key={policy.PolicyId} style={{ height: "100%" }}>
+                            <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)}>
+                              <Card.Img variant="top" src={policy.PolicyImage} />
+                              <Card.Body>
+                                <Card.Title>{policy.PolicyTitle}</Card.Title>
+                                <Card.Text>
+                                  <TextTruncate line={3} element="span" truncateText="…" text={policy.PolicyText} />
+                                </Card.Text>
+                              </Card.Body>
+                            </a>
+                            <Card.Footer style={footerStyles}>
+                              <CounterComponent
+                                policyId={policy.PolicyId}
+                                partyId={policy.PartyId}
+                                decision={policyDecision(SelectedPolicies, policy.PolicyId)}
+                                results={false}
+                              />
+                            </Card.Footer>
+                          </Card>
+                        </>
+                      );
+                    })}
+                  </CardDeck>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
           );
         })}
-      </CardDeck>
+      </Accordion>
 
       {modalPolicy ? (
         <Modal size="lg" show={show} onHide={handleClose}>
