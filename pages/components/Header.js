@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
+import { useContext } from "react";
+
+import { PolicyProviderContext } from "./policyProvider";
 
 const headerStyles = {
   padding: "2rem 1rem",
@@ -13,30 +16,38 @@ const linkStyles = {
 };
 
 const buttonStyles = {
-    //padding: "10px",
-    margin: "0px 5px"
+  //padding: "10px",
+  margin: "0px 5px",
 };
 
-const Header = () => (
-  <Jumbotron style={headerStyles}>
-    <div className="clearfix">
-      <h1 className="header">Who the F#*k should I vote for.</h1>
-      <h3 className="header">
-        A website for deciding who the f#*k should <b><u>or shouldn't</u></b> get your vote.
-      </h3>
-      <br />
-      <Link href="/results">
-        <Button style={buttonStyles} className="float-right">
-          <a style={linkStyles}>Results</a>
-        </Button>
-      </Link>
-      <Link href="/">
-        <Button style={buttonStyles} className="float-right">
-          <a style={linkStyles}>Policies</a>
-        </Button>
-      </Link>
-    </div>
-  </Jumbotron>
-);
+const Header = () => {
+  let { Policies } = useContext(PolicyProviderContext);
+  return (
+    <Jumbotron style={headerStyles}>
+      <div className="clearfix">
+        <h1 className="header">Who the F#*k should I vote for.</h1>
+        <h3 className="header">
+          A website for deciding who the f#*k should{" "}
+          <b>
+            <u>or shouldn't</u>
+          </b>{" "}
+          get your vote.
+        </h3>
+        There are currently {Policies.length} f#*king policies.
+        <br />
+        <Link href="/results">
+          <Button style={buttonStyles} className="float-right">
+            <a style={linkStyles}>Results</a>
+          </Button>
+        </Link>
+        <Link href="/">
+          <Button style={buttonStyles} className="float-right">
+            <a style={linkStyles}>Policies</a>
+          </Button>
+        </Link>
+      </div>
+    </Jumbotron>
+  );
+};
 
 export default Header;
