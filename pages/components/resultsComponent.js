@@ -26,6 +26,10 @@ const footerStyles = {
   borderTop: "none",
 };
 
+const alertStyles = {
+  margin: "10px"
+};
+
 function countPartyVotes(SelectedPolicies, partyId, decision) {
   const selectedPartyPolicies = SelectedPolicies.filter((policy) => policy.PartyId === partyId);
   let count = selectedPartyPolicies.reduce((count, policy) => {
@@ -109,7 +113,7 @@ const ResultsComponent = () => {
                 {partyPoliciesFor.map((policy) => {
                   return (
                     <>
-                      <Alert key={policy.PolicyId} variant={"success"}>
+                      <Alert style={alertStyles} key={policy.PolicyId} variant={"success"}>
                         {policy.PolicyTitle}
                       </Alert>
                     </>
@@ -120,7 +124,7 @@ const ResultsComponent = () => {
                 {partyPoliciesUndecided.map((policy) => {
                   return (
                     <>
-                      <Alert key={policy.PolicyId} variant={"warning"}>
+                      <Alert style={alertStyles} key={policy.PolicyId} variant={"warning"}>
                         {policy.PolicyTitle}
                       </Alert>
                     </>
@@ -131,7 +135,7 @@ const ResultsComponent = () => {
                 {partyPoliciesAgainst.map((policy) => {
                   return (
                     <>
-                      <Alert key={policy.PolicyId} variant={"danger"}>
+                      <Alert style={alertStyles} key={policy.PolicyId} variant={"danger"}>
                         {policy.PolicyTitle}
                       </Alert>
                     </>
