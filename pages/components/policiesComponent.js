@@ -48,6 +48,8 @@ const PoliciesComponent = () => {
     setModalPolicy(policy);
   };
 
+  if (!Policies) return null;
+
   return (
     <>
       <Accordion style={accordianStyles} defaultActiveKey="0">
