@@ -1,4 +1,5 @@
 import React from "react";
+import AsyncStorage from '@react-native-community/async-storage';
 //let policiesjson = require('./policiesjson.json');
 
 const initialState = {
@@ -16282,8 +16283,30 @@ const initialState = {
 
 export const PolicyProviderContext = React.createContext(undefined);
 
+
+const storeData = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value)
+    await AsyncStorage.setItem('@policyDB', jsonValue)
+  } catch (e) {
+    // saving error
+  }
+}
+
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('@storage_Key')
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch(e) {
+    // error reading value
+  }
+}
+
 const PolicyProvider = (props) => {
   const [state, setState] = React.useState(initialState);
+  storeData(initialState);
+  
   const setSelectedPolicy = (PolicyId, Decision, PartyId) => {
     setState((state) => {
       const selectedPolicies = state.SelectedPolicies.filter((policy) => policy.PolicyId != PolicyId);
