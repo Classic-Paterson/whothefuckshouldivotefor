@@ -27,7 +27,7 @@ const footerStyles = {
 };
 
 const alertStyles = {
-  margin: "10px"
+  margin: "10px",
 };
 
 function countPartyVotes(SelectedPolicies, partyId, decision) {
@@ -49,12 +49,12 @@ function listPartyPolicies(SelectedPolicies, Policies, partyId, decision) {
 
   let policiesToReturn = [];
 
-  Policies.forEach(policyCategory => {
-    policyCategory.Policies.forEach(policy => {
+  Policies.forEach((policyCategory) => {
+    policyCategory.Policies.forEach((policy) => {
       if (selectedPolicieIds.includes(policy.PolicyId)) {
-        policiesToReturn.push(policy)
+        policiesToReturn.push(policy);
       }
-    })
+    });
   });
 
   return policiesToReturn;
@@ -76,8 +76,19 @@ const ResultsComponent = () => {
     setPartyPoliciesUndecided(listPartyPolicies(SelectedPolicies, Policies, party.PartyId, "undecided"));
     setShow(true);
   };
-
-  if (SelectedPolicies.length > 0) {
+  if (!Policies) return null;
+  if (!SelectedPolicies){
+    return (
+      <CardDeck style={colStyles}>
+        <Card>
+          <Card.Body>
+            <Card.Title>Pick some policies you clown</Card.Title>
+          </Card.Body>
+        </Card>
+      </CardDeck>
+    );
+  }
+  else {
     return (
       <>
         <CardDeck style={colStyles}>
@@ -85,7 +96,7 @@ const ResultsComponent = () => {
             const partyVotesFor = countPartyVotes(SelectedPolicies, party.PartyId, "for");
             const partyVotesAgainst = countPartyVotes(SelectedPolicies, party.PartyId, "against");
             const partyVotesUndecided = countPartyVotes(SelectedPolicies, party.PartyId, "undecided");
-
+  
             if (partyVotesFor > 0 || partyVotesAgainst > 0 || partyVotesUndecided > 0) {
               return (
                 <Card key={party.PartyId}>
@@ -111,7 +122,7 @@ const ResultsComponent = () => {
             }
           })}
         </CardDeck>
-
+  
         {modalParty ? (
           <Modal size="lg" show={show} onHide={handleClose}>
             <Card key={modalParty.PolicyId} style={{ height: "100%" }}>
@@ -119,7 +130,7 @@ const ResultsComponent = () => {
               <Card.Body>
                 <Card.Title>{modalParty.PartyTitle}</Card.Title>
                 <Card.Text>{modalParty.PartyText}</Card.Text>
-
+  
                 {partyPoliciesFor.length > 0 ? <b>Policies you agree with:</b> : null}
                 {partyPoliciesFor.map((policy) => {
                   return (
@@ -130,7 +141,7 @@ const ResultsComponent = () => {
                     </>
                   );
                 })}
-
+  
                 {partyPoliciesUndecided.length > 0 ? <b>Policies you are undecided about:</b> : null}
                 {partyPoliciesUndecided.map((policy) => {
                   return (
@@ -141,7 +152,7 @@ const ResultsComponent = () => {
                     </>
                   );
                 })}
-
+  
                 {partyPoliciesAgainst.length > 0 ? <b>Policies you disagree with:</b> : null}
                 {partyPoliciesAgainst.map((policy) => {
                   return (
@@ -162,16 +173,6 @@ const ResultsComponent = () => {
           </Modal>
         ) : null}
       </>
-    );
-  } else {
-    return (
-      <CardDeck style={colStyles}>
-        <Card>
-          <Card.Body>
-            <Card.Title>Pick some policies you clown</Card.Title>
-          </Card.Body>
-        </Card>
-      </CardDeck>
     );
   }
 };

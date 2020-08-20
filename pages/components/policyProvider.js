@@ -16302,8 +16302,6 @@ const getData = async () => {
   }
 };
 
-
-
 const PolicyProvider = (props) => {
   const [state, setState] = useState(null);
 
