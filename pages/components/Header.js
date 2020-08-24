@@ -20,13 +20,13 @@ const buttonStyles = {
   margin: "0px 5px",
 };
 
-// function PolicyCount(Policies) {
-//   let count = 0;
-//   Policies.map((PolicyCategory) => {
-//     count += PolicyCategory.Policies.length
-//   })
-//   return count;
-// }
+function PolicyCount(Policies) {
+  let count = 0;
+  Policies.map((PolicyCategory) => {
+    count += PolicyCategory.Policies.length
+  })
+  return count;
+}
 
 const Header = () => {
   let { Policies, SelectedPolicies } = useContext(PolicyProviderContext);
@@ -41,7 +41,14 @@ const Header = () => {
           </b>{" "}
           get your vote.
         </h3>
-        {/* There are currently {PolicyCount(Policies)} f#*king policies and you've decided about {SelectedPolicies.length} of them. */}
+        {Policies ? (
+          <>
+          There are currently {PolicyCount(Policies)} f#*king policies and you've decided about {SelectedPolicies.length} of them.
+          </>
+        ) : null       
+      }
+       <br />
+         Policy statements are re-published from Policy. This site is not affiliated with Policy.
         <br />
         <Link href="/results">
           <Button style={buttonStyles} className="float-right">

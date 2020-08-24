@@ -67,7 +67,7 @@ const PoliciesComponent = () => {
                         <>
                           <Card key={policy.PolicyId} style={{ height: "100%" }}>
                             <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)}>
-                              <Card.Img variant="top" src={policy.PolicyImage} />
+                              {/* <Card.Img variant="top" src={policy.PolicyImage} /> */}
                               <Card.Body>
                                 <Card.Title>{policy.PolicyTitle}</Card.Title>
                                 <Card.Text>

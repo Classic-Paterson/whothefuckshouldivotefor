@@ -101,7 +101,7 @@ const ResultsComponent = () => {
               return (
                 <Card key={party.PartyId}>
                   <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(party)}>
-                    <Card.Img variant="top" src={party.PartyImage} />
+                    {/* <Card.Img variant="top" src={party.PartyImage} /> */}
                     <Card.Body>
                       <Card.Title>{party.PartyTitle}</Card.Title>
                       <Card.Text>
