@@ -16292,6 +16292,9 @@ const getData = async () => {
   }
 };
 
+
+
+
 const PolicyProvider = (props) => {
   const [state, setState] = useState(null);
 
@@ -16314,6 +16317,16 @@ const PolicyProvider = (props) => {
     storeData(state);
   }, [state]);
 
+  const removeData = () => {
+    try {
+      setState(initialState)
+      //AsyncStorage.removeItem("@policyDB");
+      console.log("deleted")
+    } catch (e) {
+      // error reading value
+    }
+  };
+
   const setSelectedPolicy = (PolicyId, Decision, PartyId) => {
     setState((state) => {
       const selectedPolicies = state.SelectedPolicies.filter((policy) => policy.PolicyId != PolicyId);
@@ -16330,7 +16343,7 @@ const PolicyProvider = (props) => {
     });
   };
 
-  return <PolicyProviderContext.Provider value={{ ...state, setSelectedPolicy }}>{props.children}</PolicyProviderContext.Provider>;
+  return <PolicyProviderContext.Provider value={{ ...state, setSelectedPolicy, removeData }}>{props.children}</PolicyProviderContext.Provider>;
 };
 
 export default PolicyProvider;

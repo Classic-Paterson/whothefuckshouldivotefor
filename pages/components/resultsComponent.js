@@ -50,16 +50,16 @@ function listPartyPolicies(SelectedPolicies, Policies, partyId, decision) {
   let policiesToReturn = [];
 
   Policies.forEach((policy) => {
-      if (selectedPolicieIds.includes(policy.PolicyId)) {
-        policiesToReturn.push(policy);
-      }
+    if (selectedPolicieIds.includes(policy.PolicyId)) {
+      policiesToReturn.push(policy);
+    }
   });
 
   return policiesToReturn;
 }
 
 const ResultsComponent = () => {
-  let { SelectedPolicies, Parties, Policies } = useContext(PolicyProviderContext);
+  let { SelectedPolicies, Parties, Policies, removeData } = useContext(PolicyProviderContext);
   const [modalParty, setModalParty] = useState(null);
   const [partyPoliciesFor, setPartyPoliciesFor] = useState(null);
   const [partyPoliciesAgainst, setPartyPoliciesAgainst] = useState(null);
@@ -75,7 +75,7 @@ const ResultsComponent = () => {
     setShow(true);
   };
   if (!Policies) return null;
-  if (!SelectedPolicies){
+  if (!SelectedPolicies.length) {
     return (
       <CardDeck style={colStyles}>
         <Card>
@@ -85,8 +85,7 @@ const ResultsComponent = () => {
         </Card>
       </CardDeck>
     );
-  }
-  else {
+  } else {
     return (
       <>
         <CardDeck style={colStyles}>
@@ -94,7 +93,7 @@ const ResultsComponent = () => {
             const partyVotesFor = countPartyVotes(SelectedPolicies, party.PartyId, "for");
             const partyVotesAgainst = countPartyVotes(SelectedPolicies, party.PartyId, "against");
             const partyVotesUndecided = countPartyVotes(SelectedPolicies, party.PartyId, "undecided");
-  
+
             if (partyVotesFor > 0 || partyVotesAgainst > 0 || partyVotesUndecided > 0) {
               return (
                 <Card key={party.PartyId}>
@@ -119,8 +118,22 @@ const ResultsComponent = () => {
               );
             }
           })}
+          {SelectedPolicies.length > 0 ? (
+            <Card>
+              <a style={{ cursor: "pointer", flex: "1 1 auto" }}>
+                {/* <Card.Img variant="top" src={party.PartyImage} /> */}
+                <Card.Body>
+                  <Card.Title>Manage Policies</Card.Title>
+                  <Card.Text>
+                    <Button onClick={() => removeData()}>Clear all selections</Button>
+                  </Card.Text>
+                </Card.Body>
+                <Card.Footer style={footerStyles}></Card.Footer>
+              </a>
+            </Card>
+          ) : null}
         </CardDeck>
-  
+
         {modalParty ? (
           <Modal size="lg" show={show} onHide={handleClose}>
             <Card key={modalParty.PolicyId} style={{ height: "100%" }}>
@@ -128,7 +141,7 @@ const ResultsComponent = () => {
               <Card.Body>
                 <Card.Title>{modalParty.PartyTitle}</Card.Title>
                 <Card.Text>{modalParty.PartyText}</Card.Text>
-  
+
                 {partyPoliciesFor.length > 0 ? <b>Policies you agree with:</b> : null}
                 {partyPoliciesFor.map((policy) => {
                   return (
@@ -139,7 +152,7 @@ const ResultsComponent = () => {
                     </>
                   );
                 })}
-  
+
                 {partyPoliciesUndecided.length > 0 ? <b>Policies you are undecided about:</b> : null}
                 {partyPoliciesUndecided.map((policy) => {
                   return (
@@ -150,7 +163,7 @@ const ResultsComponent = () => {
                     </>
                   );
                 })}
-  
+
                 {partyPoliciesAgainst.length > 0 ? <b>Policies you disagree with:</b> : null}
                 {partyPoliciesAgainst.map((policy) => {
                   return (

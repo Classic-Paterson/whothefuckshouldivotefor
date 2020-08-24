@@ -12,7 +12,7 @@ import { PolicyProviderContext } from "./policyProvider";
 import { AutoSizer, List } from "react-virtualized";
 
 const colStyles = {
-  padding: "1rem 0rem 0rem 1rem",
+  padding: "15px 0px 0px 0px",
   height: "auto ",
 
 };
@@ -55,6 +55,7 @@ const PoliciesComponent = () => {
 
   return (
     <>
+    {/* <Button> Show/Hide Selected Policies</Button> */}
       <CardDeck style={colStyles}>
         <AutoSizer style={colStyles}>
           {({ height, width }) => {
@@ -70,7 +71,7 @@ const PoliciesComponent = () => {
                 rowHeight={ITEM_SIZE}
                 rowRenderer={({ index, key, style }) => {
                   return (
-                    <Card  key={Policies[index].PolicyId} style={{ height: "350px", width: "330px", display: "inline-flex", marginBottom: "30px"}}>
+                    <Card  key={Policies[index].PolicyId} style={{ height: "350px", minWidth: "343px", maxWidth: "349px", display: "inline-flex", marginBottom: "15px"}}>
                     <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(Policies[index])}>
                       {/* <Card.Img variant="top" src={policy.PolicyImage} /> */}
                       <Card.Body>
