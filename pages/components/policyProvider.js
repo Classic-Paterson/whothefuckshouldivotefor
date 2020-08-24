@@ -126,9 +126,6 @@ const initialState = {
     },
   ],
   Policies: [
-    {
-      PolicyCategory: "Transport and Infrastructure",
-      Policies: [
         {
           PartyId: 2,
           PolicyTitle: "Replace the RMA with separate laws for environmental standards and urban planning",
@@ -8357,11 +8354,6 @@ const initialState = {
           PolicyImage: "/images/topic-transport-and-infrastructure.jpg",
           PolicyId: 3351,
         },
-      ],
-    },
-    {
-      PolicyCategory: "Law, Justice and Government",
-      Policies: [
         {
           PartyId: 1,
           PolicyTitle: "Require 50 percent representation of women on state sector boards",
@@ -16277,8 +16269,6 @@ const initialState = {
           PolicyId: 1991,
         },
       ],
-    },
-  ],
   SelectedPolicies: [],
 };
 

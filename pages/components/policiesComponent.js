@@ -9,12 +9,14 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import { PolicyProviderContext } from "./policyProvider";
+import { AutoSizer, List } from "react-virtualized";
 
 const colStyles = {
   padding: "1rem 1rem 0rem 1rem",
+  height: "100%",
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(277px, 1fr))",
-  gridGap: "30px 0px",
+  gridGap: "30px 0px"
 };
 
 const footerStyles = {
@@ -50,55 +52,57 @@ const PoliciesComponent = () => {
 
   if (!Policies) return null;
 
+  const ITEMS_COUNT = Policies.length
+  const ITEM_SIZE = 500
+
   return (
     <>
-      <Accordion style={accordianStyles} defaultActiveKey="0">
-        {Policies.map((policyCatergory, policyCatergoryId) => {
-          return (
-            <Card>
-              <Accordion.Toggle as={Card.Header} eventKey={policyCatergoryId + 1}>
-                {policyCatergory.PolicyCategory} - {policyCatergory.Policies.length}
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey={policyCatergoryId + 1}>
-                <Card.Body>
-                  <CardDeck style={colStyles}>
-                    {policyCatergory.Policies.map((policy) => {
-                      return (
-                        <>
-                          <Card key={policy.PolicyId} style={{ height: "100%" }}>
-                            <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)}>
-                              {/* <Card.Img variant="top" src={policy.PolicyImage} /> */}
-                              <Card.Body>
-                                <Card.Title>{policy.PolicyTitle}</Card.Title>
-                                <Card.Text>
-                                  <TextTruncate line={3} element="span" truncateText="…" text={policy.PolicyText} />
-                                </Card.Text>
-                              </Card.Body>
-                            </a>
-                            <Card.Footer style={footerStyles}>
-                              <CounterComponent
-                                policyId={policy.PolicyId}
-                                partyId={policy.PartyId}
-                                decision={policyDecision(SelectedPolicies, policy.PolicyId)}
-                                results={false}
-                              />
-                            </Card.Footer>
-                          </Card>
-                        </>
-                      );
-                    })}
-                  </CardDeck>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-          );
-        })}
-      </Accordion>
+      <CardDeck style={colStyles}>
+        <AutoSizer style={colStyles}>
+          {({ height, width }) => {
+            const itemsPerRow = 3;
+            const rowCount = Math.ceil(ITEMS_COUNT / itemsPerRow);
+
+            return (
+              <List
+                className="List"
+                width={width}
+                height={height}
+                rowCount={rowCount}
+                rowHeight={ITEM_SIZE}
+                rowRenderer={({ index, key, style }) => {
+                  return (
+                    <Card  key={Policies[index].PolicyId} style={{ height: "350px", width: "325px", display: "inline-flex"}}>
+                    <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(Policies[index])}>
+                      {/* <Card.Img variant="top" src={policy.PolicyImage} /> */}
+                      <Card.Body>
+                        <Card.Title>{Policies[index].PolicyTitle}</Card.Title>
+                        <Card.Text>
+                          <TextTruncate line={3} element="span" truncateText="…" text={Policies[index].PolicyText} />
+                        </Card.Text>
+                      </Card.Body>
+                    </a>
+                    <Card.Footer style={footerStyles}>
+                      <CounterComponent
+                        policyId={Policies[index].PolicyId}
+                        partyId={Policies[index].PartyId}
+                        decision={policyDecision(SelectedPolicies, Policies[index].PolicyId)}
+                        results={false}
+                      />
+                    </Card.Footer>
+                  </Card>
+                  );
+                }}
+              />
+            );
+          }}
+        </AutoSizer>
+      </CardDeck>
 
       {modalPolicy ? (
         <Modal size="lg" show={show} onHide={handleClose}>
           <Card key={modalPolicy.PolicyId} style={{ height: "100%" }}>
-            <Card.Img variant="top" src={modalPolicy.PolicyImage} />
+            {/* <Card.Img variant="top" src={modalPolicy.PolicyImage} /> */}
             <Card.Body>
               <Card.Title>{modalPolicy.PolicyTitle}</Card.Title>
               {/* <Card.Text>{modalPolicy.PolicyText}</Card.Text> */}

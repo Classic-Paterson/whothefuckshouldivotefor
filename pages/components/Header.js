@@ -20,14 +20,6 @@ const buttonStyles = {
   margin: "0px 5px",
 };
 
-function PolicyCount(Policies) {
-  let count = 0;
-  Policies.map((PolicyCategory) => {
-    count += PolicyCategory.Policies.length
-  })
-  return count;
-}
-
 const Header = () => {
   let { Policies, SelectedPolicies } = useContext(PolicyProviderContext);
   return (
@@ -43,12 +35,12 @@ const Header = () => {
         </h3>
         {Policies ? (
           <>
-          There are currently {PolicyCount(Policies)} f#*king policies and you've decided about {SelectedPolicies.length} of them.
+          There are currently {Policies.length} f#*king policies and you've decided about {SelectedPolicies.length} of them.
           </>
         ) : null       
       }
        <br />
-         Policy statements are re-published from Policy. This site is not affiliated with Policy.
+         Policy statements are re-published from <a href="https://policy.nz" target="_blank">Policy.</a> This site is not affiliated with Policy.
         <br />
         <Link href="/results">
           <Button style={buttonStyles} className="float-right">

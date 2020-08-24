@@ -49,12 +49,10 @@ function listPartyPolicies(SelectedPolicies, Policies, partyId, decision) {
 
   let policiesToReturn = [];
 
-  Policies.forEach((policyCategory) => {
-    policyCategory.Policies.forEach((policy) => {
+  Policies.forEach((policy) => {
       if (selectedPolicieIds.includes(policy.PolicyId)) {
         policiesToReturn.push(policy);
       }
-    });
   });
 
   return policiesToReturn;
@@ -126,7 +124,7 @@ const ResultsComponent = () => {
         {modalParty ? (
           <Modal size="lg" show={show} onHide={handleClose}>
             <Card key={modalParty.PolicyId} style={{ height: "100%" }}>
-              <Card.Img variant="top" src={modalParty.PartyImage} />
+              {/* <Card.Img variant="top" src={modalParty.PartyImage} /> */}
               <Card.Body>
                 <Card.Title>{modalParty.PartyTitle}</Card.Title>
                 <Card.Text>{modalParty.PartyText}</Card.Text>
