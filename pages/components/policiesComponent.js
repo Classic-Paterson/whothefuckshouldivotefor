@@ -12,11 +12,9 @@ import { PolicyProviderContext } from "./policyProvider";
 import { AutoSizer, List } from "react-virtualized";
 
 const colStyles = {
-  padding: "1rem 1rem 0rem 1rem",
-  height: "100%",
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(277px, 1fr))",
-  gridGap: "30px 0px"
+  padding: "1rem 0rem 0rem 1rem",
+  height: "auto ",
+
 };
 
 const footerStyles = {
@@ -53,7 +51,7 @@ const PoliciesComponent = () => {
   if (!Policies) return null;
 
   const ITEMS_COUNT = Policies.length
-  const ITEM_SIZE = 500
+  const ITEM_SIZE = 350
 
   return (
     <>
@@ -72,7 +70,7 @@ const PoliciesComponent = () => {
                 rowHeight={ITEM_SIZE}
                 rowRenderer={({ index, key, style }) => {
                   return (
-                    <Card  key={Policies[index].PolicyId} style={{ height: "350px", width: "325px", display: "inline-flex"}}>
+                    <Card  key={Policies[index].PolicyId} style={{ height: "350px", width: "330px", display: "inline-flex", marginBottom: "30px"}}>
                     <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(Policies[index])}>
                       {/* <Card.Img variant="top" src={policy.PolicyImage} /> */}
                       <Card.Body>
