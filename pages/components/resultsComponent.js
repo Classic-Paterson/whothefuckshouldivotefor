@@ -59,7 +59,7 @@ function listPartyPolicies(SelectedPolicies, Policies, partyId, decision) {
 }
 
 const ResultsComponent = () => {
-  let { SelectedPolicies, Parties, Policies, removeData } = useContext(PolicyProviderContext);
+  let { SelectedPolicies, Parties, policiesMocked, removeData } = useContext(PolicyProviderContext);
   const [modalParty, setModalParty] = useState(null);
   const [partyPoliciesFor, setPartyPoliciesFor] = useState(null);
   const [partyPoliciesAgainst, setPartyPoliciesAgainst] = useState(null);
@@ -69,12 +69,12 @@ const ResultsComponent = () => {
   const handleClose = () => setShow(false);
   const handleShow = (party) => {
     setModalParty(party);
-    setPartyPoliciesFor(listPartyPolicies(SelectedPolicies, Policies, party.PartyId, "for"));
-    setPartyPoliciesAgainst(listPartyPolicies(SelectedPolicies, Policies, party.PartyId, "against"));
-    setPartyPoliciesUndecided(listPartyPolicies(SelectedPolicies, Policies, party.PartyId, "undecided"));
+    setPartyPoliciesFor(listPartyPolicies(SelectedPolicies, policiesMocked, party.PartyId, "for"));
+    setPartyPoliciesAgainst(listPartyPolicies(SelectedPolicies, policiesMocked, party.PartyId, "against"));
+    setPartyPoliciesUndecided(listPartyPolicies(SelectedPolicies, policiesMocked, party.PartyId, "undecided"));
     setShow(true);
   };
-  if (!Policies) return null;
+  if (!policiesMocked) return null;
   if (!SelectedPolicies.length) {
     return (
       <CardDeck style={colStyles}>

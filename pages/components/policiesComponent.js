@@ -39,7 +39,6 @@ function policyDecision(SelectedPolicies, policyId) {
 const PoliciesComponent = () => {
   let { SelectedPolicies, Policies, policiesMocked } = useContext(PolicyProviderContext);
 
-  console.log(policiesMocked)
   const [modalPolicy, setModalPolicy] = useState(null);
 
   const [show, setShow] = useState(false);
