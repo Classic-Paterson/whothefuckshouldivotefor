@@ -9,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import { PolicyProviderContext } from "./policyProvider";
+import LazyLoad from "react-lazyload";
 
 const colStyles = {
   display: "grid",
@@ -56,6 +57,13 @@ const PoliciesComponent = () => {
           {policiesMocked.map((policy) => {
             return (
               <>
+
+            <LazyLoad 
+              key={policy.PolicyId}
+              height={100}
+              offset={[-100, 100]}
+            >
+
                 <Card key={policy.PolicyId} style={{ height: "100%" }}>
                   <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)}>
                     {/* <Card.Img variant="top" src={policy.PolicyImage} /> */}
@@ -70,6 +78,7 @@ const PoliciesComponent = () => {
                     <CounterComponent policyId={policy.PolicyId} partyId={policy.PartyId} decision={policyDecision(SelectedPolicies, policy.PolicyId)} results={false} />
                   </Card.Footer>
                 </Card>
+            </LazyLoad>
               </>
             );
           })}
