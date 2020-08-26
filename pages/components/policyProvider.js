@@ -207,7 +207,7 @@ const PolicyProvider = (props) => {
     });
   };
 
-  return <PolicyProviderContext.Provider value={{ ...state, setSelectedPolicy, policiesMocked }}>{props.children}</PolicyProviderContext.Provider>;
+  return <PolicyProviderContext.Provider value={{ ...state, setSelectedPolicy, policiesMocked, removeData }}>{props.children}</PolicyProviderContext.Provider>;
 };
 
 export default PolicyProvider;
