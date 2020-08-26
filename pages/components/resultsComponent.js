@@ -121,7 +121,7 @@ const ResultsComponent = () => {
           {SelectedPolicies.length > 0 ? (
             <Card>
               <a style={{ cursor: "pointer", flex: "1 1 auto" }}>
-                {/* <Card.Img variant="top" src={party.PartyImage} /> */}
+                <Card.Img variant="top" src={party.PartyImage} />
                 <Card.Body>
                   <Card.Title>Manage Policies</Card.Title>
                   <Card.Text>
