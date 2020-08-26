@@ -21,7 +21,7 @@ const buttonStyles = {
 };
 
 const Header = () => {
-  let { Policies, SelectedPolicies } = useContext(PolicyProviderContext);
+  let { policiesMocked, SelectedPolicies } = useContext(PolicyProviderContext);
   return (
     <Jumbotron style={headerStyles}>
       <div className="clearfix">
@@ -33,9 +33,9 @@ const Header = () => {
           </b>{" "}
           get your vote.
         </h3>
-        {Policies ? (
+        {policiesMocked ? (
           <>
-          There are currently {Policies.length} f#*king policies and you've decided about {SelectedPolicies.length} of them.
+          There are currently {policiesMocked.length} f#*king policies and you've decided about {SelectedPolicies.length} of them.
           </>
         ) : null       
       }
