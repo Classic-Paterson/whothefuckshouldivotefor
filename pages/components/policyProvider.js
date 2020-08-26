@@ -148,6 +148,9 @@ const getData = async () => {
   }
 };
 
+
+
+
 const PolicyProvider = (props) => {
   const [state, setState] = useState(null);
 
@@ -177,6 +180,16 @@ const PolicyProvider = (props) => {
   useEffect(() => {
     storeData(state);
   }, [state]);
+
+  const removeData = () => {
+    try {
+      setState(initialState)
+      //AsyncStorage.removeItem("@policyDB");
+      console.log("deleted")
+    } catch (e) {
+      // error reading value
+    }
+  };
 
   const setSelectedPolicy = (PolicyId, Decision, PartyId) => {
     setState((state) => {

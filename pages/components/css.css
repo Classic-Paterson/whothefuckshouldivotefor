@@ -3,5 +3,12 @@
 }
 
 .focus {
-    box-shadow: 0 0 0 0 !important
+    box-shadow: 0 0 0 0 !important;
+}
+
+.ReactVirtualized__List{
+    overflow: hidden !important;
+}
+.ReactVirtualized__List:focus{
+    outline: 0 !important;
 }
