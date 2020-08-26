@@ -11,9 +11,8 @@ import Accordion from "react-bootstrap/Accordion";
 import { PolicyProviderContext } from "./policyProvider";
 
 const colStyles = {
-  padding: "1rem 1rem 0rem 1rem",
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(277px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
   gridGap: "30px 0px",
 };
 
