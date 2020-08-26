@@ -121,7 +121,7 @@ const ResultsComponent = () => {
           {SelectedPolicies.length > 0 ? (
             <Card>
               <a style={{ cursor: "pointer", flex: "1 1 auto" }}>
-                <Card.Img variant="top" src={party.PartyImage} />
+                {/* <Card.Img variant="top" src={party.PartyImage} /> */}
                 <Card.Body>
                   <Card.Title>Manage Policies</Card.Title>
                   <Card.Text>
@@ -137,7 +137,7 @@ const ResultsComponent = () => {
         {modalParty ? (
           <Modal size="lg" show={show} onHide={handleClose}>
             <Card key={modalParty.PolicyId} style={{ height: "100%" }}>
-              {/* <Card.Img variant="top" src={modalParty.PartyImage} /> */}
+              <Card.Img variant="top" src={modalParty.PartyImage} />
               <Card.Body>
                 <Card.Title>{modalParty.PartyTitle}</Card.Title>
                 <Card.Text>{modalParty.PartyText}</Card.Text>
