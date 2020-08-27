@@ -21,7 +21,7 @@ const buttonStyles = {
 };
 
 const Header = () => {
-  let { policiesMocked, SelectedPolicies } = useContext(PolicyProviderContext);
+  let { policiesMocked, SelectedPolicies, invertShowAllPolicies, showAllPolicies } = useContext(PolicyProviderContext);
   return (
     <Jumbotron style={headerStyles}>
       <div className="clearfix">
@@ -42,6 +42,10 @@ const Header = () => {
        <br />
          Policy statements are re-published from <a href="https://policy.nz" target="_blank">Policy.</a> This site is not affiliated with Policy.
         <br />
+        <br />
+          <Button style={buttonStyles} onClick={() => invertShowAllPolicies()}>
+            <a style={linkStyles}>{showAllPolicies ? "Hide" : "Show"} Policies</a>
+          </Button>
         <Link href="/results">
           <Button style={buttonStyles} className="float-right">
             <a style={linkStyles}>Results</a>

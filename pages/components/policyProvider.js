@@ -1,6 +1,7 @@
 //@ts-check
 import { useEffect, useState, createContext } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
+import { FaTemperatureHigh } from "react-icons/fa";
 //let policiesjson = require('./policiesjson.json');
 
 const initialState = {
@@ -154,6 +155,12 @@ const getData = async () => {
 const PolicyProvider = (props) => {
   const [state, setState] = useState(null);
 
+  const [showAllPolicies, setShowAllPolicies] = useState(true);
+  
+  const invertShowAllPolicies = () => {
+    setShowAllPolicies(!showAllPolicies);
+  }
+
   const [policiesMocked, setPoliciesMocked] = useState(null);
 
   const getInitialState = async () => {
@@ -207,7 +214,7 @@ const PolicyProvider = (props) => {
     });
   };
 
-  return <PolicyProviderContext.Provider value={{ ...state, setSelectedPolicy, policiesMocked, removeData }}>{props.children}</PolicyProviderContext.Provider>;
+  return <PolicyProviderContext.Provider value={{ ...state, setSelectedPolicy, policiesMocked, removeData, showAllPolicies, invertShowAllPolicies}}>{props.children}</PolicyProviderContext.Provider>;
 };
 
 export default PolicyProvider;

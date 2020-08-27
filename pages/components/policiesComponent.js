@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import { PolicyProviderContext } from "./policyProvider";
 import LazyLoad from "react-lazyload";
+import ScrollToTop from "react-scroll-to-top";
 
 const colStyles = {
   display: "grid",
@@ -37,9 +38,20 @@ function policyDecision(SelectedPolicies, policyId) {
 }
 
 const PoliciesComponent = () => {
-  let { SelectedPolicies, Policies, policiesMocked } = useContext(PolicyProviderContext);
+  let { SelectedPolicies, Policies, policiesMocked, showAllPolicies} = useContext(PolicyProviderContext);
 
   const [modalPolicy, setModalPolicy] = useState(null);
+
+  const showWholeCardFilter = (policyId) => {
+    if (!showAllPolicies) {
+      let selectedPolicieIds = SelectedPolicies.map(function (selectedPolicy) {
+        return selectedPolicy.PolicyId;
+      });
+
+      return !selectedPolicieIds.includes(policyId);
+    }
+    else return true;
+  };
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -52,36 +64,38 @@ const PoliciesComponent = () => {
 
   return (
     <>
+     <ScrollToTop smooth />
       <Card.Body>
         <CardDeck style={colStyles}>
-          {policiesMocked.map((policy) => {
-            return (
-              <>
-
-            <LazyLoad 
-              key={policy.PolicyId}
-              height={100}
-              offset={[-100, 100]}
-            >
-
-                <Card key={policy.PolicyId} style={{ height: "100%" }}>
-                  <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)}>
-                    {/* <Card.Img variant="top" src={policy.PolicyImage} /> */}
-                    <Card.Body>
-                      <Card.Title>{policy.PolicyTitle}</Card.Title>
-                      <Card.Text>
-                        <TextTruncate line={3} element="span" truncateText="…" text={policy.PolicyText} />
-                      </Card.Text>
-                    </Card.Body>
-                  </a>
-                  <Card.Footer style={footerStyles}>
-                    <CounterComponent policyId={policy.PolicyId} partyId={policy.PartyId} decision={policyDecision(SelectedPolicies, policy.PolicyId)} results={false} />
-                  </Card.Footer>
-                </Card>
-            </LazyLoad>
-              </>
-            );
-          })}
+          {policiesMocked
+            .filter((policy) => showWholeCardFilter(policy.PolicyId))
+            .map((policy) => {
+              return (
+                <>
+                  <LazyLoad key={policy.PolicyId} height={100} offset={[-100, 100]}>
+                    <Card key={policy.PolicyId} style={{ height: "100%" }}>
+                      <a style={{ cursor: "pointer", flex: "1 1 auto" }} onClick={() => handleShow(policy)}>
+                        {/* <Card.Img variant="top" src={policy.PolicyImage} /> */}
+                        <Card.Body>
+                          <Card.Title>{policy.PolicyTitle}</Card.Title>
+                          <Card.Text>
+                            <TextTruncate line={3} element="span" truncateText="…" text={policy.PolicyText} />
+                          </Card.Text>
+                        </Card.Body>
+                      </a>
+                      <Card.Footer style={footerStyles}>
+                        <CounterComponent
+                          policyId={policy.PolicyId}
+                          partyId={policy.PartyId}
+                          decision={policyDecision(SelectedPolicies, policy.PolicyId)}
+                          results={false}
+                        />
+                      </Card.Footer>
+                    </Card>
+                  </LazyLoad>
+                </>
+              );
+            })}
         </CardDeck>
       </Card.Body>
 
