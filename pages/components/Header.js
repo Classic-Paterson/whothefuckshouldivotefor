@@ -2,8 +2,10 @@ import Link from "next/link";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
 import { useContext } from "react";
+import { useRouter } from "next/router";
 
 import { PolicyProviderContext } from "./policyProvider";
+
 
 const headerStyles = {
   padding: "2rem 1rem",
@@ -22,6 +24,8 @@ const buttonStyles = {
 
 const Header = () => {
   let { policiesMocked, SelectedPolicies, invertShowAllPolicies, showAllPolicies } = useContext(PolicyProviderContext);
+  const router = useRouter();
+
   return (
     <Jumbotron style={headerStyles}>
       <div className="clearfix">
@@ -35,17 +39,22 @@ const Header = () => {
         </h3>
         {policiesMocked ? (
           <>
-          There are currently {policiesMocked.length} f#*king policies and you've decided about {SelectedPolicies.length} of them.
+            There are currently {policiesMocked.length} f#*king policies and you've decided about {SelectedPolicies.length} of them.
           </>
-        ) : null       
-      }
-       <br />
-         Policy statements are re-published from <a href="https://policy.nz" target="_blank">Policy.</a> This site is not affiliated with Policy.
+        ) : null}
+        <br />
+        Policy statements are re-published from{" "}
+        <a href="https://policy.nz" target="_blank">
+          Policy.
+        </a>{" "}
+        This site is not affiliated with Policy.
         <br />
         <br />
+        {router.pathname == "/" ? (
           <Button style={buttonStyles} onClick={() => invertShowAllPolicies()}>
             <a style={linkStyles}>{showAllPolicies ? "Hide" : "Show"} Policies</a>
           </Button>
+        ) : null}
         <Link href="/results">
           <Button style={buttonStyles} className="float-right">
             <a style={linkStyles}>Results</a>
